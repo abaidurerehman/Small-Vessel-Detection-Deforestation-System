@@ -1,0 +1,64 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8000/api/v1
+        - VITE_API_TOKEN=supersecrettoken123
+    ports:
+      - "3000:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - app-network
+
+  api-gateway:
+    build:
+      context: ./backend/gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DEFORESTATION_SERVICE_URL=http://deforestation-service:8001
+      - VESSEL_SERVICE_URL=http://vessel-service:8002
+      - SECRET_TOKEN=supersecrettoken123
+    depends_on:
+      - deforestation-service
+      - vessel-service
+    networks:
+      - app-network
+
+  deforestation-service:
+    build:
+      context: ./backend/deforestation_service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./models:/app/models
+    environment:
+      # Point to your .pt file inside the container's /app/models/ folder
+      - MODEL_PATH=/app/models/Deforestationmodel.pt
+      - CONF_THRESHOLD=0.25
+    networks:
+      - app-network
+
+  vessel-service:
+    build:
+      context: ./backend/vessel_service
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./models:/app/models
+    environment:
+      # Point to your .pt file inside the container's /app/models/ folder
+      - MODEL_PATH=/app/models/Vesselmodel.pt
+      - CONF_THRESHOLD=0.25
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
