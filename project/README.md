@@ -1,297 +1,406 @@
-# 🛰️ SentinelAI — Detection Platform
+# 🛰️ SentinelAI — AI-Powered Satellite Intelligence Platform
 
-AI-powered **Deforestation Detection** and **Small Vessel Detection** from satellite imagery.
+SentinelAI is a modern AI-powered satellite imagery analysis platform designed for:
 
-## 🏗️ Architecture
+- 🌿 Deforestation Detection
+- 🛥️ Small Vessel Detection
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    User Browser                          │
-│               React Frontend (:3000)                     │
-└────────────────────────┬────────────────────────────────┘
-                         │ HTTP (Axios)
-┌────────────────────────▼────────────────────────────────┐
-│              API Gateway (:8000)                         │
-│         FastAPI · Token Auth · Logging                   │
-└──────────────┬──────────────────┬──────────────────────┘
-               │                  │
-┌──────────────▼──────┐  ┌────────▼──────────────────┐
-│ Deforestation Svc   │  │  Vessel Detection Svc     │
-│  FastAPI (:8001)    │  │  FastAPI (:8002)          │
-│  Deforestationmodel │  │  Vesselmodel              │
-└─────────────────────┘  └───────────────────────────┘
+The platform uses a scalable microservices architecture powered by FastAPI, React, and Docker.
+
+---
+
+# ✨ Features
+
+- 🌍 Satellite image analysis
+- 🤖 AI-powered object detection & classification
+- ⚡ FastAPI microservices architecture
+- 🐳 Fully Dockerized deployment
+- 🔐 API Gateway with token authentication
+- 📊 Interactive React frontend
+- 📁 Modular and scalable structure
+- ☁️ Cloud deployment ready
+- 📖 Swagger API documentation
+- 🎨 Modern responsive UI
+
+---
+
+# 🏗️ System Architecture
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│                        User Browser                          │
+│                    React Frontend (:3000)                    │
+└───────────────────────────┬──────────────────────────────────┘
+                            │ HTTP / Axios
+┌───────────────────────────▼──────────────────────────────────┐
+│                    API Gateway (:8000)                       │
+│           FastAPI · Authentication · Logging                 │
+└───────────────────┬──────────────────────┬──────────────────┘
+                    │                      │
+        ┌───────────▼──────────┐  ┌────────▼───────────────┐
+        │ Deforestation Service │  │ Vessel Detection Svc   │
+        │      FastAPI          │  │       FastAPI          │
+        │       (:8001)         │  │        (:8002)         │
+        └───────────────────────┘  └────────────────────────┘
 ```
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
-```
-project/
+```text
+SentinelAI/
+│
 ├── docker-compose.yml
 ├── .env
+│
 ├── frontend/
 │   ├── Dockerfile
 │   ├── nginx.conf
 │   ├── package.json
 │   ├── tailwind.config.js
+│   ├── vite.config.js
 │   ├── .env
 │   └── src/
-│       ├── App.js
-│       ├── index.js
-│       ├── index.css
 │       ├── pages/
-│       │   ├── Home.js
-│       │   ├── Deforestation.js
-│       │   └── VesselDetection.js
 │       ├── components/
-│       │   ├── Navbar.js
-│       │   ├── Footer.js
-│       │   ├── ImageUploader.js
-│       │   ├── ConfidenceBar.js
-│       │   ├── SpinnerOverlay.js
-│       │   └── PageLoader.js
-│       └── utils/
-│           └── api.js
+│       ├── utils/
+│       └── assets/
+│
 └── backend/
     ├── gateway/
-    │   ├── Dockerfile
-    │   ├── requirements.txt
-    │   ├── main.py
-    │   ├── middleware/
-    │   │   └── logging_middleware.py
-    │   ├── routers/
-    │   │   ├── health.py
-    │   │   ├── deforestation.py
-    │   │   └── vessel.py
-    │   └── utils/
-    │       └── auth.py
     ├── deforestation_service/
-    │   ├── Dockerfile
-    │   ├── requirements.txt
-    │   ├── main.py
-    │   ├── routers/
-    │   │   ├── health.py
-    │   │   └── predict.py
-    │   ├── services/
-    │   │   └── model_service.py
-    │   └── models/
-    │       └── schemas.py
     └── vessel_service/
-        ├── Dockerfile
-        ├── requirements.txt
-        ├── main.py
-        ├── routers/
-        │   ├── health.py
-        │   └── predict.py
-        ├── services/
-        │   └── model_service.py
-        └── models/
-            └── schemas.py
 ```
 
 ---
 
-## 🐳 Docker Guide for Beginners
+# 🧠 AI Services
 
-### What is Docker?
+## 🌿 Deforestation Detection Service
 
-Docker lets you package an application and all its dependencies into a portable "container". Think of it like a shipping container — it works the same everywhere, whether on your laptop or a server in the cloud.
+Detects deforestation severity from satellite forest imagery.
 
-**Key concepts:**
-- **Image** — a blueprint for a container (built from a `Dockerfile`)
-- **Container** — a running instance of an image
-- **docker-compose** — a tool to run multiple containers together with one command
+### Capabilities
+
+- Severe deforestation detection
+- Moderate deforestation detection
+- Forest health analysis
+- Confidence scoring
+- Processed image output
 
 ---
 
-### Step 1 — Install Docker
+## 🛥️ Vessel Detection Service
 
-**Windows / macOS:**
-1. Go to https://www.docker.com/products/docker-desktop
-2. Download and install **Docker Desktop**
-3. Start Docker Desktop (you'll see the whale icon in your taskbar)
+Detects and localizes small vessels from maritime satellite imagery.
 
-**Linux (Ubuntu/Debian):**
+### Capabilities
+
+- Multi-vessel detection
+- Bounding box generation
+- Confidence scoring
+- Annotated image generation
+- Detection statistics
+
+---
+
+# ⚙️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 18, Vite, Tailwind CSS, Framer Motion |
+| Backend | FastAPI, Python 3.11 |
+| AI/ML | TensorFlow, YOLO, NumPy, Pillow |
+| Gateway | FastAPI, httpx |
+| Containerization | Docker, Docker Compose |
+| Web Server | Nginx Alpine |
+| Deployment | AWS EC2 / Docker |
+
+---
+
+# 🐳 Docker Deployment Guide
+
+## 📦 What is Docker?
+
+Docker packages applications and dependencies into isolated containers that run consistently across environments.
+
+### Core Concepts
+
+| Concept | Description |
+|---|---|
+| Image | Blueprint/template for containers |
+| Container | Running instance of an image |
+| Dockerfile | Instructions to build an image |
+| Docker Compose | Runs multiple containers together |
+
+---
+
+# 🚀 Quick Start
+
+## 1️⃣ Clone Repository
+
 ```bash
-sudo apt-get update
-sudo apt-get install -y docker.io docker-compose
-sudo usermod -aG docker $USER   # run docker without sudo
+git clone YOUR_REPOSITORY_URL
+cd SentinelAI
+```
+
+---
+
+## 2️⃣ Install Docker
+
+### Windows / macOS
+
+Install Docker Desktop:
+
+https://www.docker.com/products/docker-desktop
+
+---
+
+### Ubuntu / Debian
+
+```bash
+sudo apt update
+
+sudo apt install docker.io docker-compose -y
+
+sudo usermod -aG docker $USER
+
 newgrp docker
 ```
 
 Verify installation:
+
 ```bash
-docker --version        # Docker version 24.x.x
-docker compose version  # Docker Compose version 2.x.x
+docker --version
+docker compose version
 ```
 
 ---
 
-### Step 2 — Add Your Models (Optional)
+# 📂 Add AI Models
 
-If you have trained model files, place them here:
-```
-project/
-└── models/
-    ├── Deforestationmodel/   ← your deforestation model weights
-    └── Vesselmodel/          ← your vessel detection model weights
+Place your trained models inside:
+
+```text
+models/
+├── Deforestationmodel/
+└── Vesselmodel/
 ```
 
-> If no models are present, the services run in **simulation mode** and return realistic dummy predictions so you can test the full UI/API flow.
+Example:
+
+```text
+models/
+├── Deforestationmodel/best_model.h5
+└── Vesselmodel/weights/best.pt
+```
+
+> If models are missing, the services automatically switch to simulation mode.
 
 ---
 
-### Step 3 — Run the Project
+# ▶️ Run the Platform
 
-Open a terminal, navigate to the project root, and run:
+## Build & Start Containers
 
 ```bash
-# Go to the project directory
-cd project
-
-# Build all Docker images and start all containers
 docker compose up --build
 ```
 
-The first run takes 3–8 minutes to download base images and install dependencies. Subsequent starts are much faster.
+---
 
-To run in the background (detached mode):
+## Run in Background
+
 ```bash
 docker compose up --build -d
 ```
 
 ---
 
-### Step 4 — Access the Application
+# 🌐 Access the Platform
 
 | Service | URL |
 |---|---|
-| 🌐 Frontend (Website) | http://localhost:3000 |
-| 🔌 API Gateway | http://localhost:8000 |
-| 📖 API Docs (Gateway) | http://localhost:8000/docs |
-| 🌿 Deforestation Docs | http://localhost:8001/docs |
-| 🛥️ Vessel Docs | http://localhost:8002/docs |
+| Frontend | http://localhost:3000 |
+| API Gateway | http://localhost:8000 |
+| Gateway Docs | http://localhost:8000/docs |
+| Deforestation Docs | http://localhost:8001/docs |
+| Vessel Docs | http://localhost:8002/docs |
 
 ---
 
-### Useful Docker Commands
+# 🛠️ Useful Docker Commands
+
+## View Running Containers
 
 ```bash
-# View running containers
 docker compose ps
+```
 
-# View logs (all services)
+---
+
+## View Logs
+
+```bash
 docker compose logs -f
+```
 
-# View logs (specific service)
+---
+
+## View Specific Service Logs
+
+```bash
 docker compose logs -f api-gateway
+```
 
-# Stop all containers
+---
+
+## Stop Containers
+
+```bash
 docker compose down
+```
 
-# Stop and remove volumes
+---
+
+## Remove Volumes
+
+```bash
 docker compose down -v
+```
 
-# Rebuild a single service
+---
+
+## Rebuild Single Service
+
+```bash
 docker compose up --build deforestation-service
+```
 
-# Enter a running container's shell
+---
+
+## Access Container Shell
+
+```bash
 docker compose exec api-gateway bash
 ```
 
 ---
 
-## 🔌 API Reference
+# 🔌 API Reference
 
-### Authentication
+# 🔐 Authentication
 
-All endpoints require a Bearer token header:
-```
+All API requests require:
+
+```http
 Authorization: Bearer supersecrettoken123
 ```
-> Change this in `.env` before deploying to production.
+
+Change the token in `.env` before production deployment.
 
 ---
 
-### POST `/api/v1/predict-deforestation`
+# 🌿 Deforestation Prediction
 
-Upload a forest/satellite image for deforestation classification.
+## Endpoint
 
-**Request:** `multipart/form-data`
-- `file` — image file (JPG/PNG/WEBP/TIFF, max 20MB)
+```http
+POST /api/v1/predict-deforestation
+```
 
-**Response:**
+---
+
+## Request
+
+`multipart/form-data`
+
+| Field | Type |
+|---|---|
+| file | Image |
+
+Supported formats:
+
+- JPG
+- PNG
+- WEBP
+- TIFF
+
+Maximum size:
+
+- 20MB
+
+---
+
+## Example Response
+
 ```json
 {
   "label": "Severe Deforestation",
   "confidence": 0.9124,
   "confidence_percent": "91.2%",
-  "all_scores": {
-    "Severe Deforestation": 0.9124,
-    "Moderate Deforestation": 0.0521,
-    ...
-  },
   "processed_image": "<base64-jpeg>",
-  "image_size": { "width": 800, "height": 600 },
   "model_version": "Deforestationmodel-v1.0"
 }
 ```
 
-**Example (curl):**
+---
+
+## cURL Example
+
 ```bash
 curl -X POST http://localhost:8000/api/v1/predict-deforestation \
-  -H "Authorization: Bearer supersecrettoken123" \
-  -F "file=@/path/to/forest.jpg"
+-H "Authorization: Bearer supersecrettoken123" \
+-F "file=@forest.jpg"
 ```
 
 ---
 
-### POST `/api/v1/predict-vessel`
+# 🛥️ Vessel Detection
 
-Upload a maritime/aerial image for vessel detection.
+## Endpoint
 
-**Request:** `multipart/form-data`
-- `file` — image file (JPG/PNG/WEBP/TIFF, max 20MB)
+```http
+POST /api/v1/predict-vessel
+```
 
-**Response:**
+---
+
+## Example Response
+
 ```json
 {
   "vessel_count": 3,
-  "detections": [
-    {
-      "id": 1,
-      "class": "Small Fishing Vessel",
-      "confidence": 0.8732,
-      "confidence_percent": "87.3%",
-      "bounding_box": { "x": 124, "y": 88, "width": 62, "height": 40, "x2": 186, "y2": 128 },
-      "color": "rgb(255,69,0)"
-    }
-  ],
-  "average_confidence": 0.8732,
-  "average_confidence_percent": "87.3%",
+  "average_confidence": 0.87,
   "annotated_image": "<base64-jpeg>",
-  "image_size": { "width": 1024, "height": 768 },
   "model_version": "Vesselmodel-v1.0"
 }
 ```
 
-**Example (curl):**
+---
+
+## cURL Example
+
 ```bash
 curl -X POST http://localhost:8000/api/v1/predict-vessel \
-  -H "Authorization: Bearer supersecrettoken123" \
-  -F "file=@/path/to/satellite.jpg"
+-H "Authorization: Bearer supersecrettoken123" \
+-F "file=@satellite.jpg"
 ```
 
 ---
 
-### GET `/api/v1/health`
+# ❤️ Health Check
 
-Check health of all services.
+## Endpoint
 
-```bash
-curl http://localhost:8000/api/v1/health
+```http
+GET /api/v1/health
 ```
+
+---
+
+## Example Response
 
 ```json
 {
@@ -305,63 +414,122 @@ curl http://localhost:8000/api/v1/health
 
 ---
 
-## 🔧 Integrating Your Real Models
+# 🧠 Integrating Real AI Models
 
-### Deforestation Model
-Edit `backend/deforestation_service/services/model_service.py`:
+# TensorFlow Example
 
-```python
-def load_model(self):
-    import tensorflow as tf
-    self.model = tf.saved_model.load("/app/models/Deforestationmodel")
-    self.model_loaded = True
+File:
 
-def _run_model_inference(self, img):
-    img_resized = img.resize((224, 224))
-    img_array = np.array(img_resized) / 255.0
-    img_array = np.expand_dims(img_array, axis=0).astype(np.float32)
-    predictions = self.model(img_array)
-    # Map output to label + confidence and return dict
+```text
+backend/deforestation_service/services/model_service.py
 ```
 
-### Vessel Model (YOLO)
-Edit `backend/vessel_service/services/model_service.py`:
-
 ```python
-def load_model(self):
-    from ultralytics import YOLO
-    self.model = YOLO("/app/models/Vesselmodel/weights/best.pt")
-    self.model_loaded = True
+import tensorflow as tf
 
-def _run_model_inference(self, img):
-    results = self.model(img)
-    # Parse results[0].boxes and build detections list
+self.model = tf.saved_model.load("/app/models/Deforestationmodel")
 ```
 
 ---
 
-## 🔐 Security Notes for Production
+# YOLO Example
 
-1. Replace `SECRET_TOKEN` in `.env` with a strong random secret
-2. Set up HTTPS using Let's Encrypt + Nginx reverse proxy
-3. Restrict CORS origins in each service's `main.py`
-4. Use Docker secrets or environment injection for credentials
-5. Enable rate limiting on the API gateway
+File:
+
+```text
+backend/vessel_service/services/model_service.py
+```
+
+```python
+from ultralytics import YOLO
+
+self.model = YOLO("/app/models/Vesselmodel/weights/best.pt")
+```
 
 ---
 
-## 📦 Tech Stack
+# ☁️ AWS Deployment
 
-| Layer | Technology |
+## Recommended Deployment
+
+| Component | Hosting |
 |---|---|
-| Frontend | React 18, Framer Motion, Tailwind CSS, Axios |
-| API Gateway | Python 3.11, FastAPI, httpx |
-| ML Services | FastAPI, Pillow, NumPy |
-| Container | Docker, docker-compose |
-| Web Server | Nginx (Alpine) |
+| Frontend | EC2 + Docker |
+| Backend | EC2 + Docker |
+| AI Models | EC2 |
+| Reverse Proxy | Nginx |
+| SSL | Let's Encrypt |
 
 ---
 
-## 📄 License
+## AWS Free Tier Notes
 
-MIT License © 2025 SentinelAI
+AI inference may require additional RAM.
+
+Recommended:
+
+```bash
+sudo fallocate -l 4G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+```
+
+---
+
+# 🔐 Production Security
+
+Before production deployment:
+
+- Change API tokens
+- Enable HTTPS
+- Restrict CORS
+- Add rate limiting
+- Use Docker secrets
+- Configure Nginx reverse proxy
+
+---
+
+# 📊 Frontend Features
+
+- Responsive UI
+- Animated transitions
+- File upload previews
+- Confidence bars
+- Loading overlays
+- Modern dark theme
+- API integration via Axios
+
+---
+
+# 📈 Future Improvements
+
+- User authentication system
+- GPU inference support
+- Kubernetes deployment
+- Multi-model orchestration
+- Real-time satellite feeds
+- Model monitoring dashboard
+- CI/CD pipelines
+- Redis caching
+- Database integration
+
+---
+
+# 👨‍💻 Author
+
+## Abaidur-E-Rehman
+
+Machine Learning Engineer & Full Stack AI Developer
+
+- AI Systems
+- FastAPI Microservices
+- Computer Vision
+- Cloud Deployment
+- Docker & DevOps
+
+---
+
+# 📄 License
+
+MIT License © 2026 SentinelAI

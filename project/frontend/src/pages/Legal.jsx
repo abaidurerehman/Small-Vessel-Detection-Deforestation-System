@@ -1,68 +1,234 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
 const content = {
   '/privacy': {
-    title: 'Privacy Policy', emoji: '🔒',
-    updated: 'April 2025',
+    title: 'Privacy Policy',
+    emoji: '🔒',
+    updated: 'May 2026',
+    color: '#16a34a',
     sections: [
-      { heading: '1. Information We Collect', body: 'We collect only the images you upload for analysis. These images are processed in real-time and are not stored on our servers. We do not collect personal identification information unless you contact us directly.' },
-      { heading: '2. How We Use Your Data', body: 'Uploaded images are sent to our AI inference microservices (Deforestationmodel, Vesselmodel) solely for the purpose of generating detection results. Results are returned to your browser and not retained.' },
-      { heading: '3. Data Retention', body: 'No image data is stored after your session ends. All inference happens in-memory and results are discarded immediately after being returned to the client.' },
-      { heading: '4. Third-Party Services', body: 'This platform uses no third-party analytics, advertising, or tracking services. All computation happens on our local infrastructure.' },
-      { heading: '5. Security', body: 'API endpoints are protected by Bearer token authentication. We recommend deploying behind HTTPS in production environments.' },
-      { heading: '6. Contact', body: 'For privacy concerns, contact us at contact@sentinelai.io or visit our GitHub: github.com/abaidurerehman' },
+      {
+        heading: '1. Information We Collect',
+        body:
+          'We only process the satellite images uploaded for AI analysis. Images are analyzed in real-time and are not permanently stored on our servers.',
+      },
+      {
+        heading: '2. AI Processing',
+        body:
+          'Uploaded images are securely processed by Vessel Detection and Deforestation Detection microservices solely for generating inference results.',
+      },
+      {
+        heading: '3. Data Retention',
+        body:
+          'No uploaded image data is retained after inference is completed. All processing happens temporarily in memory.',
+      },
+      {
+        heading: '4. Third-Party Services',
+        body:
+          'This platform does not use advertising trackers, analytics services, or third-party data-sharing systems.',
+      },
+      {
+        heading: '5. Security',
+        body:
+          'API endpoints are protected with Bearer authentication and should be deployed behind HTTPS in production environments.',
+      },
+      {
+        heading: '6. Contact',
+        body:
+          'For privacy concerns or data requests, contact the SentinelAI development team.',
+      },
     ],
   },
+
   '/terms': {
-    title: 'Terms of Service', emoji: '📋',
-    updated: 'April 2025',
+    title: 'Terms of Service',
+    emoji: '📋',
+    updated: 'May 2026',
+    color: '#0284c7',
     sections: [
-      { heading: '1. Acceptance', body: 'By using SentinelAI, you agree to these Terms of Service. If you do not agree, do not use the platform.' },
-      { heading: '2. Permitted Use', body: 'This platform is intended for research, environmental monitoring, and maritime security purposes. You may use it to analyze satellite imagery for deforestation detection and vessel identification.' },
-      { heading: '3. Prohibited Use', body: 'You may not use this platform for illegal surveillance, invasion of privacy, military targeting, or any activity that violates applicable laws. Do not upload images containing personally identifiable information.' },
-      { heading: '4. Accuracy Disclaimer', body: 'AI predictions are probabilistic and may not be 100% accurate. Do not rely solely on model outputs for critical decisions without human verification.' },
-      { heading: '5. Intellectual Property', body: 'The SentinelAI platform, logo, and trained models are the property of the development team at UET Lahore, Narowal Campus. Unauthorized reproduction is prohibited.' },
-      { heading: '6. Limitation of Liability', body: 'The platform is provided "as is" without warranty. We are not liable for any damages arising from use or inability to use this service.' },
+      {
+        heading: '1. Acceptance',
+        body:
+          'By using SentinelAI, you agree to comply with these Terms of Service.',
+      },
+      {
+        heading: '2. Permitted Use',
+        body:
+          'This platform is intended for environmental monitoring, maritime analysis, and educational or research purposes.',
+      },
+      {
+        heading: '3. Prohibited Use',
+        body:
+          'You may not use this platform for illegal surveillance, privacy invasion, or unlawful activities.',
+      },
+      {
+        heading: '4. Accuracy Disclaimer',
+        body:
+          'AI detections are probabilistic and may not always be fully accurate. Human verification is recommended.',
+      },
+      {
+        heading: '5. Intellectual Property',
+        body:
+          'All SentinelAI branding, UI components, and trained AI models remain the intellectual property of the development team.',
+      },
+      {
+        heading: '6. Limitation of Liability',
+        body:
+          'SentinelAI is provided "as is" without warranties. The development team is not liable for damages arising from platform usage.',
+      },
     ],
   },
+
   '/cookies': {
-    title: 'Cookie Policy', emoji: '🍪',
-    updated: 'April 2025',
+    title: 'Cookie Policy',
+    emoji: '🍪',
+    updated: 'May 2026',
+    color: '#7c3aed',
     sections: [
-      { heading: '1. Do We Use Cookies?', body: 'SentinelAI uses minimal cookies. We do not use advertising cookies, tracking cookies, or third-party analytics cookies of any kind.' },
-      { heading: '2. Essential Cookies', body: 'We may use session-based cookies to maintain your authentication token during an active session. These expire when you close your browser.' },
-      { heading: '3. Local Storage', body: 'Some UI preferences (such as confidence threshold settings) may be stored in your browser\'s local storage for convenience. This data never leaves your device.' },
-      { heading: '4. Third-Party Cookies', body: 'We do not use any third-party cookies. No data is shared with advertising networks, social media platforms, or analytics providers.' },
-      { heading: '5. Managing Cookies', body: 'You can clear cookies and local storage at any time through your browser settings. This will reset any saved preferences but will not affect platform functionality.' },
-      { heading: '6. Updates', body: 'This cookie policy may be updated periodically. Continued use of the platform constitutes acceptance of any changes.' },
+      {
+        heading: '1. Essential Cookies',
+        body:
+          'Minimal session cookies may be used for authentication and secure session handling.',
+      },
+      {
+        heading: '2. No Advertising Cookies',
+        body:
+          'SentinelAI does not use advertising, tracking, or marketing cookies.',
+      },
+      {
+        heading: '3. Local Storage',
+        body:
+          'UI preferences such as confidence threshold values may be saved locally inside your browser.',
+      },
+      {
+        heading: '4. Third-Party Services',
+        body:
+          'No third-party analytics providers or advertising systems are integrated into the platform.',
+      },
+      {
+        heading: '5. Managing Cookies',
+        body:
+          'You may clear cookies or browser local storage at any time through browser settings.',
+      },
+      {
+        heading: '6. Updates',
+        body:
+          'This Cookie Policy may be updated periodically as platform functionality evolves.',
+      },
     ],
   },
 };
 
+/* ── Reveal ───────────────────────────────────────────── */
+function Reveal({ children, delay = 0 }) {
+  const ref = useRef(null);
+
+  const inView = useInView(ref, {
+    once: true,
+    margin: '-60px',
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.6,
+        delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function Legal() {
   const { pathname } = useLocation();
+
   const page = content[pathname] || content['/privacy'];
 
   return (
-    <motion.div initial={{opacity:0}} animate={{opacity:1}} className="relative min-h-screen px-6 pt-28 pb-20">
-      <div className="absolute inset-0 pointer-events-none" style={{background:'radial-gradient(ellipse 60% 40% at 50% 20%, rgba(34,197,94,0.05) 0%, transparent 60%)'}}/>
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <motion.div initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} className="mb-10">
-          <p className="text-xs font-mono text-slate-500 mb-3 uppercase tracking-widest">Legal</p>
-          <h1 className="font-display font-bold text-4xl md:text-5xl text-white mb-3">
-            {page.emoji} {page.title}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="relative min-h-screen px-6 pt-28 pb-20"
+      style={{
+        background:
+          'linear-gradient(160deg, #f8fafc 0%, #f1f5f9 45%, #eef2ff 100%)',
+      }}
+    >
+      {/* Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 dot-pattern opacity-40" />
+
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `radial-gradient(ellipse 60% 40% at 20% 15%, ${page.color}12 0%, transparent 60%)`,
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-14"
+        >
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-xs font-mono tracking-widest uppercase"
+            style={{
+              background: `${page.color}12`,
+              border: `1px solid ${page.color}25`,
+              color: page.color,
+            }}
+          >
+            Legal Documents
+          </div>
+
+          <h1 className="font-display font-extrabold text-4xl md:text-6xl leading-tight mb-5">
+            <span>{page.emoji} </span>
+
+            <span className="text-slate-800">{page.title}</span>
           </h1>
-          <p className="text-slate-500 text-sm font-mono">Last updated: {page.updated} · UET Lahore, Narowal Campus</p>
+
+          <p className="text-slate-500 text-sm font-mono">
+            Last updated: {page.updated} · SentinelAI Platform
+          </p>
         </motion.div>
+
+        {/* Sections */}
         <div className="flex flex-col gap-6">
           {page.sections.map((s, i) => (
-            <motion.div key={i} initial={{opacity:0,y:15}} animate={{opacity:1,y:0}}
-              transition={{delay:i*0.07}} className="glass rounded-2xl p-6">
-              <h3 className="font-display font-semibold text-white mb-3">{s.heading}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{s.body}</p>
-            </motion.div>
+            <Reveal key={i} delay={i * 0.06}>
+              <motion.div
+                whileHover={{
+                  y: -4,
+                  boxShadow: `0 16px 36px ${page.color}12`,
+                }}
+                className="glass rounded-3xl p-7 relative overflow-hidden"
+              >
+                <div
+                  className="absolute top-0 left-0 w-full h-1"
+                  style={{
+                    background: `linear-gradient(90deg, ${page.color}, transparent)`,
+                  }}
+                />
+
+                <h3 className="font-display font-semibold text-slate-800 mb-3 text-lg">
+                  {s.heading}
+                </h3>
+
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  {s.body}
+                </p>
+              </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>

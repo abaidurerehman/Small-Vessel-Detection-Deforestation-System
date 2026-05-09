@@ -24,18 +24,17 @@ module.exports = {
           600: "#0284c7",
           900: "#0c4a6e",
         },
-        dark: {
-          900: "#050810",
-          800: "#090d1a",
-          700: "#0d1424",
-          600: "#111827",
-          500: "#1f2937",
+        light: {
+          50: "#f0fdf4",
+          100: "#f0f4f8",
+          200: "#e8f4fd",
+          300: "#e2e8f0",
+          400: "#cbd5e1",
         },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "mesh-forest": "radial-gradient(at 40% 20%, #052e16 0px, transparent 50%), radial-gradient(at 80% 0%, #0c4a6e 0px, transparent 50%), radial-gradient(at 0% 50%, #14532d 0px, transparent 50%)",
-        "mesh-ocean": "radial-gradient(at 40% 20%, #0c4a6e 0px, transparent 50%), radial-gradient(at 80% 0%, #052e16 0px, transparent 50%), radial-gradient(at 0% 50%, #1e1b4b 0px, transparent 50%)",
+        "mesh-light": "radial-gradient(at 40% 20%, #dcfce7 0px, transparent 50%), radial-gradient(at 80% 0%, #e0f2fe 0px, transparent 50%), radial-gradient(at 0% 50%, #f0fdf4 0px, transparent 50%)",
       },
       animation: {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",

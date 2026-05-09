@@ -9,8 +9,8 @@ export default function PageLoader() {
         transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
         className="w-12 h-12 rounded-full"
         style={{
-          border: '2px solid rgba(255,255,255,0.05)',
-          borderTop: '2px solid #4ade80',
+          border: '2px solid rgba(34,197,94,0.15)',
+          borderTop: '2px solid #16a34a',
         }}
       />
       <motion.p

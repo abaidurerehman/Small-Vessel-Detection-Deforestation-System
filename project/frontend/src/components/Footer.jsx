@@ -62,7 +62,7 @@ function NavBtn({ label, path, navigate }) {
     <li>
       <button
         onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); navigate(path); }}
-        className="text-sm text-slate-500 hover:text-white transition-colors flex items-center gap-1.5 group text-left"
+        className="text-sm text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1.5 group text-left"
       >
         <span className="w-1 h-1 rounded-full bg-slate-700 group-hover:bg-green-400 transition-colors shrink-0"/>
         {label}
@@ -75,7 +75,7 @@ export default function Footer() {
   const navigate = useNavigate();
 
   return (
-    <footer style={{ background: '#030508', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+    <footer style={{ background: '#f0fdf4', borderTop: '1px solid rgba(34,197,94,0.18)' }}>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
 
@@ -87,7 +87,7 @@ export default function Footer() {
                 className="w-10 h-10 rounded-xl object-cover transition-transform group-hover:scale-105"
                 style={{ background: '#000' }} />
               <div className="flex flex-col leading-tight">
-                <span className="font-display font-bold text-sm text-white">Small Vessel Detection</span>
+                <span className="font-display font-bold text-sm text-slate-800">Small Vessel Detection</span>
                 <span className="font-display text-xs text-green-400">& Deforestation System</span>
               </div>
             </button>
@@ -100,7 +100,7 @@ export default function Footer() {
                 <motion.a key={label} href={url} target="_blank" rel="noopener noreferrer"
                   whileHover={{ scale: 1.15, color: '#4ade80' }}
                   className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
-                  style={{ background: 'rgba(255,255,255,0.05)', color: '#64748b' }}>
+                  style={{ background: 'rgba(34,197,94,0.08)', color: '#475569' }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d={icon} />
@@ -113,12 +113,12 @@ export default function Footer() {
 
           {/* Latest Articles */}
           <div className="md:col-span-1">
-            <h4 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Latest Articles</h4>
+            <h4 className="font-display font-semibold text-slate-700 mb-5 text-sm uppercase tracking-widest">Latest Articles</h4>
             <ul className="space-y-4">
               {articles.map(({ title, date, url }) => (
                 <li key={title}>
                   <a href={url} target="_blank" rel="noopener noreferrer" className="group block">
-                    <span className="text-sm text-slate-400 group-hover:text-green-400 transition-colors leading-snug block mb-1">{title}</span>
+                    <span className="text-sm text-slate-500 group-hover:text-green-600 transition-colors leading-snug block mb-1">{title}</span>
                     <span className="text-xs text-slate-600 font-mono">{date}</span>
                   </a>
                 </li>
@@ -128,7 +128,7 @@ export default function Footer() {
 
           {/* Platform links */}
           <div>
-            <h4 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Platform</h4>
+            <h4 className="font-display font-semibold text-slate-700 mb-5 text-sm uppercase tracking-widest">Platform</h4>
             <ul className="space-y-3">
               {platformLinks.map(l => <NavBtn key={l.path} {...l} navigate={navigate}/>)}
             </ul>
@@ -136,11 +136,11 @@ export default function Footer() {
 
           {/* Legal + Contact */}
           <div>
-            <h4 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Legal</h4>
+            <h4 className="font-display font-semibold text-slate-700 mb-5 text-sm uppercase tracking-widest">Legal</h4>
             <ul className="space-y-3 mb-8">
               {legalLinks.map(l => <NavBtn key={l.path} {...l} navigate={navigate}/>)}
             </ul>
-            <h4 className="font-display font-semibold text-white mb-4 text-sm uppercase tracking-widest">Contact</h4>
+            <h4 className="font-display font-semibold text-slate-700 mb-4 text-sm uppercase tracking-widest">Contact</h4>
             <ul className="space-y-3 text-sm text-slate-500">
               <li>
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=abaidurerehman1001@gmail.com"
@@ -179,7 +179,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-14 pt-6 flex flex-col md:flex-row items-center justify-between gap-4"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          style={{ borderTop: '1px solid rgba(34,197,94,0.14)' }}>
           <p className="text-xs text-slate-600">
             © 2025 Small Vessel Detection & Deforestation System — UET Lahore, Narowal Campus
           </p>
